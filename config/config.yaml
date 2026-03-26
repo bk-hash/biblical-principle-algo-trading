@@ -1,0 +1,60 @@
+# Trading Configuration
+# Adjust these settings to match your risk tolerance and goals.
+# "Distribute your investments among many places,
+#  for you do not know what risks might lie ahead." — Ecclesiastes 11:2
+
+trading:
+  # Starting capital for paper trading / backtesting (USD)
+  initial_capital: 10000.0
+
+  # Maximum percentage of capital to risk per trade (capital preservation)
+  max_risk_per_trade_pct: 1.0        # 1% — conservative default
+
+  # Maximum total portfolio drawdown before halting all trading
+  max_drawdown_pct: 10.0             # Stop trading if equity drops 10% from peak
+
+  # Maximum number of open positions at once (diversification)
+  max_open_positions: 5
+
+  # Minimum cash reserve to keep at all times (pct of initial capital)
+  min_cash_reserve_pct: 20.0
+
+data:
+  # Default symbols to trade / backtest (ETFs / large-caps; lower volatility)
+  default_symbols:
+    - "SPY"   # S&P 500 ETF — broad market exposure
+    - "QQQ"   # Nasdaq-100 ETF
+    - "AAPL"  # Apple
+    - "MSFT"  # Microsoft
+
+  # Default look-back period for backtesting (YYYY-MM-DD)
+  default_start_date: "2020-01-01"
+  default_end_date:   "2024-12-31"
+
+  # Price column used for signals and execution
+  price_column: "Close"
+
+strategies:
+  moving_average_crossover:
+    # Short-term SMA window (days)
+    short_window: 20
+    # Long-term SMA window (days)
+    long_window:  50
+
+  rsi:
+    # RSI look-back period (days)
+    period:          14
+    # Enter long when RSI crosses above oversold level
+    oversold_level:  30
+    # Exit long / enter short when RSI crosses below overbought level
+    overbought_level: 70
+
+paper_trading:
+  # Simulated commission per trade (USD)
+  commission: 1.0
+  # Simulated slippage as fraction of price
+  slippage: 0.001
+
+logging:
+  level: "INFO"
+  log_file: "logs/trading.log"
